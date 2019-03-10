@@ -1,48 +1,19 @@
 package InitialService;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InitialServiceTest {
-    @Test
-    public void getInitialsTwoWordsName() {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/initials.csv", numLinesToSkip = 1)
+    void getInitials(String input, String expected) {
         InitialService service = new InitialService();
-        String name = "Ivan Petrov";
 
-        String actual = service.getInitialsOne(name);
+        String actual = service.getInitialsOne(input);
 
-        assertEquals("IP", actual);
-    }
-
-    @Test
-    public void getInitialsThreeWordsName() {
-        InitialService service = new InitialService();
-        String name = "Huan Pedro Rodriges";
-
-        String actual = service.getInitialsTwo(name);
-
-        assertEquals("HR", actual);
-    }
-
-    @Test
-    public void getInitialsOneWordsName() {
-        InitialService service = new InitialService();
-        String name = "Ivan";
-
-        String actual = service.getInitialsThree(name);
-
-        assertEquals("I", actual);
-    }
-
-    @Test
-    public void getInitialsTwoWordsUpperName() {
-        InitialService service = new InitialService();
-        String name = "ivan petrov";
-
-        String actual = service.getInitialsFour(name).toUpperCase();
-
-        assertEquals("IP", actual);
+        assertEquals(expected, actual);
     }
 
 }
