@@ -15,5 +15,4 @@ class InitialServiceTest {
 
         assertEquals(expected, actual);
     }
-
 }
